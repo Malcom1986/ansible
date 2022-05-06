@@ -1,7 +1,4 @@
 - hosts: webservers
-  vars:
-    nginx_port: 80
-    root_dir: /usr/share/nginx/html
 
   tasks:
     - name: install nginx
@@ -11,8 +8,8 @@
       become: yes
 
     - name: copy page
-      ansible.builtin.copy:
-        src: files/index.html
+      ansible.builtin.template:
+        src: templates/index.html.j2
         dest: "{{root_dir}}/index.html"
       become: yes
 
