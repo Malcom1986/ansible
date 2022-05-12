@@ -1,5 +1,10 @@
 - hosts: webservers
   gather_facts: no
+  vars:
+    users:
+      - jaime
+      - sansa
+      - robert
 
   tasks:
 
@@ -16,3 +21,17 @@
       become: yes
       tags: install
 
+    - name: add users
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+        groups: malcom
+      loop: "{{ users }}"
+      become: yes
+
+    - name: add git config
+      ansible.builtin.template:
+        src: templates/.gitconfig.j2
+        dest: "/home/{{ item }}/.gitconfig"
+      loop: "{{ users }}"
+      become: yes
