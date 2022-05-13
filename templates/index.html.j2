@@ -8,6 +8,7 @@
 </head>
 <body>
   <h1>Hello World!!!</h1>
-  <h2>This is server {{ server_name }}!</h2>
+  <h2>{{ text | upper }}</h2>
+  <small>Now is {{ansible_date_time.date}} {{ansible_date_time.weekday}}</small>
 </body>
 </html>
