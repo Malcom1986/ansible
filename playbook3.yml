@@ -1,6 +1,17 @@
 - hosts: webservers
 
   tasks:
+
+    - name: install cowsay
+      ansible.builtin.apt:
+        name: cowsay
+        state: latest
+      become: yes
+
+    - name: start cowsay
+      ansible.builtin.shell: "cowsay {{server_name}}"
+      register: result
+
     - name: install nginx
       ansible.builtin.apt:
         name: nginx
